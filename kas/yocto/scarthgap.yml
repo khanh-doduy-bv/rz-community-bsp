@@ -6,9 +6,6 @@ header:
 distro: poky
 
 repos:
-  rz-community-bsp:
-    layers:
-      meta-rz-bsp:
   poky:
     url: "https://git.yoctoproject.org/git/poky"
     # scarthgap-5.0.3
@@ -16,13 +13,6 @@ repos:
     layers:
       meta:
       meta-poky:
-  meta-arm:
-    url: https://git.yoctoproject.org/meta-arm
-    # yocto-5.0
-    commit: 8aa8a1f17f5b64bc691544f989f04fc83df98adb
-    layers:
-      meta-arm-toolchain:
-      meta-arm:
   meta-openembedded:
     url: https://git.openembedded.org/meta-openembedded
     # scarthgap HEAD

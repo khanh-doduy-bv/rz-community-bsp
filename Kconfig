@@ -119,6 +119,17 @@ choice
 	depends on MACHINE_SMARC-RZG2UL
 	default "kas/machine/smarc-rzg2ul.yml"
 
+	config MACHINE_RZG2L-SBC
+	bool "rzg2l-sbc"
+	select FAMILY_G2L
+	help
+		Select the Renesas RZ/G2L reference platform from SBC
+
+	config KAS_INCLUDE_MACHINE_RZG2L-SBC
+	string
+	depends on MACHINE_RZG2L-SBC
+	default "kas/machine/rzg2l-sbc.yml"
+
 endchoice
 endmenu
 
@@ -148,6 +159,18 @@ choice
 	string
 	depends on IMAGE_RENESAS_IMAGE_DEMO
 	default "kas/image/renesas-image-demo.yml"
+
+	config IMAGE_CORE_IMAGE_MINIMAL
+	depends on MACHINE_RZG2L-SBC
+	bool "core-image-minimal"
+	help
+		Build a core image minimal image
+		Currently only supported on rzg2l-sbc
+
+	config KAS_INCLUDE_IMAGE_CORE_IMAGE_MINIMAL
+	string
+	depends on IMAGE_CORE_IMAGE_MINIMAL
+	default "kas/image/core-image-minimal.yml"
 endchoice
 endmenu
 
@@ -165,6 +188,16 @@ choice
 	string
 	depends on KERNEL_RENESAS_5.10
 	default "kas/kernel/renesas-5.10.yml"
+
+	config KERNEL_YOCTO_5.10
+	bool "Renesas SBC v5.10"
+	help
+		Use the Linux kernel from the Renesas BSP based on CIP SLTS v5.10
+
+	config KAS_INCLUDE_KERNEL_YOCTO_5.10
+	string
+	depends on KERNEL_YOCTO_5.10
+	default "kas/kernel/linux-yocto_5.10.yml"
 
 	config KERNEL_CIP_5.10
 	bool "CIP SLTS v5.10"
@@ -207,6 +240,7 @@ menu "Bootloaders"
 	menu "U-Boot"
 	choice
 		prompt "Select the U-Boot version to use"
+		default UBOOT_SBC_2021.10 if MACHINE_RZG2L-SBC
 		default UBOOT_MAINLINE_2023.10 if FAMILY_G2H
 		default UBOOT_RENESAS_2021.10
 
@@ -230,6 +264,16 @@ menu "Bootloaders"
 		string
 		depends on UBOOT_MAINLINE_2023.10
 		default "kas/u-boot/mainline-2023.10.yml"
+
+		config UBOOT_SBC_2021.10
+		bool "Renesas SBC v2021.10"
+		help
+			Use Renesas U-Boot v2021.10
+
+		config KAS_INCLUDE_UBOOT_SBC_2021.10
+		string
+		depends on UBOOT_SBC_2021.10
+		default "kas/u-boot/u-boot-2021.10.yml"
 	endchoice
 	endmenu
 

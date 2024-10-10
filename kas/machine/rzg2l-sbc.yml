@@ -1,0 +1,22 @@
+header:
+  version: 14
+
+machine: rzg2l-sbc
+
+local_conf_header:
+  remove_flash_write: |
+    EXTRA_IMAGEDEPENDS:remove:rzg2l-sbc += "flash-writer"
+    BB_NUMBER_THREADS = "8"
+    PARALLEL_MAKE = "-j 8" 
+
+repos:
+  meta-renesas:
+    url: "https://github.com/vudangRVC/meta-renesas-sst.git"
+    # scarthgap-5.0.3
+    commit: 4e065c22b1ae49680f8bda0a73964d08c9530a01 
+  poky:
+    layers:
+      meta-yocto-bsp:
+  meta-openembedded:
+    layers:
+      meta-python:

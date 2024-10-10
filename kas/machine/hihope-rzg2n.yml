@@ -1,4 +1,6 @@
 header:
   version: 14
+  includes:
+    - kas/common/source-common.yml
 
 machine: hihope-rzg2n
